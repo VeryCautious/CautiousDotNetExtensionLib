@@ -28,9 +28,7 @@ Public Module CollectionExtensions
     <Extension>
     Public Function ZipWithIndex(Of T)(InputList As IEnumerable(Of T)) As IEnumerable(Of IndexValuePair(Of T))
         Dim indexList = GetIndexCollection(0, InputList.Count - 1)
-        Return InputList.Zip(indexList, Function(f As T, s As Integer) As IndexValuePair(Of T)
-                                            Return New IndexValuePair(Of T)(s, f)
-                                        End Function)
+        Return InputList.Zip(indexList, Function(f As T, s As Integer) New IndexValuePair(Of T)(s, f))
     End Function
 
     ''' <summary>
@@ -64,5 +62,59 @@ Public Module CollectionExtensions
 
         Return ResultArray
     End Function
+
+    ''' <summary>
+    ''' Foldes all items of an array to a single value
+    ''' </summary>
+    ''' <typeparam name="F">The InputType</typeparam>
+    ''' <typeparam name="T">The OutputType</typeparam>
+    ''' <param name="MappingFunction">This function takes a value out of the array and the accumulated value to this point 
+    ''' and maps it to a new accumulated value</param>
+    ''' <param name="NeutralElement">The value the accumulator has at the start</param>
+    ''' <returns>the accumulated value</returns>
+    <Extension>
+    Public Function Fold(Of F, T)(InputArray As IEnumerable(Of F), MappingFunction As Func(Of F, T, T), NeutralElement As T) As T
+        Dim res As T = NeutralElement
+        For Each Item In InputArray
+            res = MappingFunction(Item, res)
+        Next
+        Return res
+    End Function
+
+    ''' <summary>
+    ''' Sets a Dictionary-Entry or adds it if it does not exist
+    ''' </summary>
+    ''' <typeparam name="K"></typeparam>
+    ''' <typeparam name="V"></typeparam>
+    ''' <param name="Dict"></param>
+    ''' <param name="Key"></param>
+    ''' <param name="Val"></param>
+    <Extension()>
+    Public Sub AddOrSet(Of K, V)(Dict As Dictionary(Of K, V), Key As K, Val As V)
+        If Dict.ContainsKey(Key) Then
+            Dict(Key) = Val
+        Else
+            Dict.Add(Key, Val)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Shuffels a List
+    ''' </summary>
+    ''' <typeparam name="t"></typeparam>
+    ''' <param name="List"></param>
+    <Extension()>
+    Sub Shuffle(Of t)(List As List(Of t))
+        List.Sort(New Shufflecomparer(Of t))
+    End Sub
+
+    Class Shufflecomparer(Of t)
+        Implements IComparer(Of t)
+        ReadOnly r As New Random
+        Public Function Compare(x As t, y As t) As Integer Implements IComparer(Of t).Compare
+            'Hier werden normalerweise X und Y miteinander verglichen.
+            Return r.Next(-1, 2)
+        End Function
+    End Class
 
 End Module

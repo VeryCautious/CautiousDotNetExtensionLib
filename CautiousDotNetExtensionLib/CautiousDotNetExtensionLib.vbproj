@@ -4,6 +4,12 @@
     <RootNamespace>CautiousDotNetExtensionLib</RootNamespace>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OptionStrict>On</OptionStrict>
+    <Authors>VeryCautious</Authors>
+    <Company>-</Company>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Description>Some extensions for dotNet</Description>
+    <PackageId>Cautious.DotNetExtensionLib</PackageId>
+    <RepositoryUrl>https://github.com/VeryCautious/CautiousDotNetExtensionLib</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
