@@ -1,6 +1,6 @@
 ﻿Imports System.Reflection
 
-Module ReflectionExtensions
+Public Module ReflectionExtensions
 
     Public Function LoadInstances(Of T)(Optional args As Object() = Nothing) As IEnumerable(Of T)
         Dim thisAsm As Assembly = Assembly.GetExecutingAssembly()

@@ -1,4 +1,5 @@
 ﻿Imports CautiousDotNetExtensionLib.StringExtensions
+Imports CautiousDotNetExtensionLib.MathExtensions
 Imports Xunit
 Namespace XUnitTestProject
     Public Class StringExtensionTest
@@ -20,6 +21,10 @@ Namespace XUnitTestProject
             Assert.Equal("4.56", Matches(1))
             Assert.Equal("78.9", Matches(2))
             Assert.Equal("", Matches(3))
+
+            Dim a As Integer = 5
+            Assert.True(a.IsBetween(3, 6))
+            Assert.True(Not a.IsBetween(6, 9))
         End Sub
 
         <Fact>

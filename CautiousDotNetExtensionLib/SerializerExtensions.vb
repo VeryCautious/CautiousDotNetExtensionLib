@@ -2,7 +2,7 @@
 Imports System.Runtime.CompilerServices
 Imports System.Runtime.Serialization.Formatters.Binary
 
-Module SerializerExtensions
+Public Module SerializerExtensions
 
     <Extension()>
     Public Sub SerializeToFile(BF As BinaryFormatter, obj As Object, Path As String)
