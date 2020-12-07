@@ -4,6 +4,8 @@ Public Module StringExtensions
 
     ''' <summary>
     ''' Extracts data out of a String. Throws an exeption if the string does not match
+    ''' !! Within the capuring group there can not be a char that is after the group or the match will fail!!
+    ''' for example when you have the pattern "{0}n" then the String to match can not have a n before the last char.
     ''' </summary>
     ''' <param name="S">The String that the data should be extraced from</param>
     ''' <param name="Pattern">The pattern, where the capuring groups are labeled with {n} and n beeing the index in the result-array</param>
@@ -19,6 +21,8 @@ Public Module StringExtensions
 
     ''' <summary>
     ''' Extracts data out of a String. Returns Nothing if the String does not match
+    ''' !! Within the capuring group there can not be a char that is after the group or the match will fail!!
+    ''' for example when you have the pattern "{0}n" then the String to match can not have a n before the last char.
     ''' </summary>
     ''' <param name="S">The String that the data should be extraced from</param>
     ''' <param name="Pattern">The pattern, where the capuring groups are labeled with {n} and n beeing the index in the result-array</param>
