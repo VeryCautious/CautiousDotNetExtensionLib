@@ -22,6 +22,16 @@ Public Module CollectionExtensions
     End Function
 
     ''' <summary>
+    ''' Creates a copy of the List with only the items that match the predicate
+    ''' </summary>
+    <Extension>
+    Public Function Filter(Of F)(InputList As List(Of F), Predicate As Predicate(Of F)) As List(Of F)
+        Dim Copy = InputList.Map(Function(x) x)
+        Copy.RemoveAll(Predicate)
+        Return Copy
+    End Function
+
+    ''' <summary>
     ''' Returns a new IEnumerable containing IndexValuePairs.
     ''' </summary>
     ''' <typeparam name="T">The Type that is stored in the Inputlist</typeparam>
@@ -84,11 +94,6 @@ Public Module CollectionExtensions
     ''' <summary>
     ''' Sets a Dictionary-Entry or adds it if it does not exist
     ''' </summary>
-    ''' <typeparam name="K"></typeparam>
-    ''' <typeparam name="V"></typeparam>
-    ''' <param name="Dict"></param>
-    ''' <param name="Key"></param>
-    ''' <param name="Val"></param>
     <Extension()>
     Public Sub AddOrSet(Of K, V)(Dict As Dictionary(Of K, V), Key As K, Val As V)
         If Dict.ContainsKey(Key) Then
@@ -101,8 +106,6 @@ Public Module CollectionExtensions
     ''' <summary>
     ''' Shuffels a List
     ''' </summary>
-    ''' <typeparam name="t"></typeparam>
-    ''' <param name="List"></param>
     <Extension()>
     Sub Shuffle(Of t)(List As List(Of t))
         List.Sort(New Shufflecomparer(Of t))
