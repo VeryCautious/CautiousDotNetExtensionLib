@@ -22,7 +22,7 @@ Public Module CollectionExtensions
     End Function
 
     ''' <summary>
-    ''' Creates a copy of the List with only the items that match the predicate
+    ''' Creates a copy of the List and removes all that match the predicate
     ''' </summary>
     <Extension>
     Public Function Filter(Of F)(InputList As List(Of F), Predicate As Predicate(Of F)) As List(Of F)
